@@ -1,0 +1,38 @@
+package Protecto2;
+
+/**
+ * La clase Cliente representa a un cliente en el sistema, 
+ * almacenando su nombre y proporcionando métodos para acceder a esta información.
+ */
+public class Cliente {
+    // Nombre del cliente
+    private String nombre;
+
+    /**
+     * Constructor de la clase Cliente.
+     *
+     * @param nombre El nombre del cliente.
+     */
+    public Cliente(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * Obtiene el nombre del cliente.
+     *
+     * @return El nombre del cliente.
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * Devuelve una representación en forma de cadena del cliente.
+     *
+     * @return El nombre del cliente como cadena.
+     */
+    @Override
+    public String toString() {
+        return nombre;
+    }
+}
