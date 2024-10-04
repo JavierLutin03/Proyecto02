@@ -1,38 +1,48 @@
 package Protecto2;
 
-
-
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.lang.reflect.Type;
 import java.util.List;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+/**
+ * La clase GestorCatalogo se encarga de gestionar el catálogo de productos,
+ * permitiendo cargar productos desde un archivo JSON y guardar productos en dicho archivo.
+ */
 public class GestorCatalogo {
     
-	 private static final String rutaCatalogo = "src/Protecto2/catalogo.json";
+    // Ruta del archivo JSON que almacena el catálogo de productos
+    private static final String rutaCatalogo = "src/Protecto2/catalogo.json";
 
+    /**
+     * Carga una lista de productos desde el archivo JSON especificado en rutaCatalogo.
+     *
+     * @return Una lista de objetos Producto cargados desde el archivo, o null en caso de error.
+     */
     public List<Producto> cargarCatalogo() {
         try (FileReader reader = new FileReader(rutaCatalogo)) {
             Gson gson = new Gson();
-            Type productoListType = new TypeToken(){
-
-				public Type getType() {
-					// TODO Auto-generated method stub
-					return null;
-				}}.getType();
-            return gson.fromJson(reader, productoListType);
+            Type productoListType = new TypeToken<List<Producto>>() {}.getType(); // Define el tipo de la lista de productos
+            return gson.fromJson(reader, productoListType); // Deserializa el contenido del archivo JSON en una lista de productos
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return null; // Devuelve null en caso de error
         }
     }
 
+    /**
+     * Guarda una lista de productos en el archivo JSON especificado en rutaCatalogo.
+     *
+     * @param productos La lista de productos que se desea guardar en el archivo.
+     */
     public void guardarCatalogo(List<Producto> productos) {
         try (FileWriter writer = new FileWriter(rutaCatalogo)) {
             Gson gson = new Gson();
-            gson.fromJson1(productos, writer);
+            gson.toJson(productos, writer); // Serializa la lista de productos y la escribe en el archivo JSON
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Manejo de excepciones
         }
     }
 }
