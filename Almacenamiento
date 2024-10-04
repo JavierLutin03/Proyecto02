@@ -1,0 +1,34 @@
+package Protecto2;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
+
+
+public class Almacenamiento {
+    private static Almacenamiento instancia;
+
+    private Almacenamiento() {
+        
+    }
+
+    public static Almacenamiento getInstancia() {
+        if (instancia == null) {
+            instancia = new Almacenamiento();
+        }
+        return instancia;
+    }
+
+    public void guardarPedidos(List<Pedido> pedidos, String archivo) {
+        try (FileWriter writer = new FileWriter(archivo)) {
+            for (Pedido pedido : pedidos) {
+                writer.write(pedido.toString() + "\n");
+            }
+        } catch (IOException e) {
+            System.err.println("Error al guardar los pedidos: " + e.getMessage());
+            System.out.println("  ");
+        }
+        System.out.println("  ");
+    }
+
+    }
