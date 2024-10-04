@@ -1,0 +1,38 @@
+package Protecto2;
+
+
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.lang.reflect.Type;
+import java.util.List;
+
+public class GestorCatalogo {
+    
+	 private static final String rutaCatalogo = "src/Protecto2/catalogo.json";
+
+    public List<Producto> cargarCatalogo() {
+        try (FileReader reader = new FileReader(rutaCatalogo)) {
+            Gson gson = new Gson();
+            Type productoListType = new TypeToken(){
+
+				public Type getType() {
+					// TODO Auto-generated method stub
+					return null;
+				}}.getType();
+            return gson.fromJson(reader, productoListType);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void guardarCatalogo(List<Producto> productos) {
+        try (FileWriter writer = new FileWriter(rutaCatalogo)) {
+            Gson gson = new Gson();
+            gson.fromJson1(productos, writer);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
